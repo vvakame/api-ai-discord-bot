@@ -75,8 +75,8 @@
   name = "github.com/k0kubun/pp"
 
 [[constraint]]
-  branch = "master"
-  name = "github.com/kamalpy/apiai-go"
+  branch = "json-utf8"
+  name = "github.com/vvakame/apiai-go"
 
 [[constraint]]
   name = "github.com/mattn/go-isatty"

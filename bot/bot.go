@@ -11,7 +11,7 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/k0kubun/pp"
-	"github.com/kamalpy/apiai-go"
+	"github.com/vvakame/apiai-go"
 )
 
 func main() {

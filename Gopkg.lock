@@ -20,12 +20,6 @@
   revision = "d1532fc5d94ecdf2da29e24d7b99721f3287de4a"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/kamalpy/apiai-go"
-  packages = ["."]
-  revision = "75eee0889daad8d43202c2162c900c1a23e861e7"
-
-[[projects]]
   name = "github.com/mattn/go-colorable"
   packages = ["."]
   revision = "941b50ebc6efddf4c41c8e4537a5f68a4e686b24"
@@ -36,6 +30,12 @@
   packages = ["."]
   revision = "fc9e8d8ef48496124e79ae0df75490096eccf6fe"
   version = "v0.0.2"
+
+[[projects]]
+  branch = "json-utf8"
+  name = "github.com/vvakame/apiai-go"
+  packages = ["."]
+  revision = "f51dd5029d86cc0cd7d8b103bd13cbf2f60270cf"
 
 [[projects]]
   branch = "master"
@@ -52,6 +52,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b2fee696cc09cbf016bd66c7c19a69d6afd7b7a413e1975e97ce4e7809923695"
+  inputs-digest = "d198397327f53e915e4e4792524184c1a112c9c622820ecedc43380aa8f41347"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -9,10 +9,18 @@ import (
 	"strings"
 	"syscall"
 
+	"cloud.google.com/go/compute/metadata"
 	"github.com/bwmarrin/discordgo"
 	"github.com/k0kubun/pp"
-	"github.com/vvakame/apiai-go"
+	"github.com/kamalpy/apiai-go"
 )
+
+type Config struct {
+	discordBOTToken           string
+	apiaiDeveloperAccessToken string
+}
+
+var config *Config
 
 func main() {
 	dg, err := launchBot()
@@ -30,10 +38,13 @@ func main() {
 }
 
 func launchBot() (*discordgo.Session, error) {
-	if err := checkTokens(); err != nil {
+	var err error
+	config, err = getTokens()
+	if err != nil {
 		return nil, err
 	}
-	dg, err := discordgo.New("Bot " + os.Getenv("DISCORD_BOT_TOKEN"))
+
+	dg, err := discordgo.New("Bot " + config.discordBOTToken)
 	if err != nil {
 		fmt.Println("Error creating Discord session: ", err)
 		return nil, err
@@ -51,15 +62,36 @@ func launchBot() (*discordgo.Session, error) {
 	return dg, nil
 }
 
-func checkTokens() error {
-	if token := os.Getenv("DISCORD_BOT_TOKEN"); token == "" {
-		return errors.New("DISCORD_BOT_TOKEN is empty")
+func getTokens() (*Config, error) {
+	dToken := os.Getenv("DISCORD_BOT_TOKEN")
+	if dToken == "" {
+		token, err := metadata.Get("discord-bot-token")
+		if err != nil {
+			return nil, err
+		}
+
+		dToken = token
 	}
-	if token := os.Getenv("APIAI_DEVELOPER_ACCESS_TOKEN"); token == "" {
-		return errors.New("APIAI_DEVELOPER_ACCESS_TOKEN is empty")
+	if dToken == "" {
+		return nil, errors.New("Discord BOT token is empty")
 	}
 
-	return nil
+	aToken := os.Getenv("APIAI_DEVELOPER_ACCESS_TOKEN")
+	if aToken == "" {
+		token, err := metadata.Get("apiai-developer-access-token")
+		if err != nil {
+			return nil, err
+		}
+		aToken = token
+	}
+	if aToken == "" {
+		return nil, errors.New("api.ai Developer AccessToken is empty")
+	}
+
+	return &Config{
+		discordBOTToken:           dToken,
+		apiaiDeveloperAccessToken: aToken,
+	}, nil
 }
 
 func ready(s *discordgo.Session, event *discordgo.Ready) {
@@ -100,7 +132,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	fmt.Println(content)
 
 	ai := &apiaigo.APIAI{
-		AuthToken: os.Getenv("APIAI_DEVELOPER_ACCESS_TOKEN"),
+		AuthToken: config.apiaiDeveloperAccessToken,
 		Language:  "ja",
 		SessionID: fmt.Sprintf("c%v", m.ChannelID),
 		Version:   "20170611",

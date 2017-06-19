@@ -4,3 +4,6 @@
 bridge-bot
 
 vendor/
+_vendor*/
+
+service_account.json

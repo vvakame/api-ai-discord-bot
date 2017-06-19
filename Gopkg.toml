@@ -68,6 +68,10 @@
 
 [[constraint]]
   branch = "master"
+  name = "cloud.google.com/go"
+
+[[constraint]]
+  branch = "master"
   name = "github.com/bwmarrin/discordgo"
 
 [[constraint]]
@@ -75,8 +79,8 @@
   name = "github.com/k0kubun/pp"
 
 [[constraint]]
-  branch = "json-utf8"
-  name = "github.com/vvakame/apiai-go"
+  branch = "master"
+  name = "github.com/kamalpy/apiai-go"
 
 [[constraint]]
   name = "github.com/mattn/go-isatty"

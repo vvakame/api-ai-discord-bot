@@ -1,0 +1,9 @@
+# https://cloud.google.com/container-builder/docs/how-to/writing-build-requests
+
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/api-ai-discord-bot:$REVISION_ID', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['tag', 'gcr.io/$PROJECT_ID/api-ai-discord-bot:$REVISION_ID', 'gcr.io/$PROJECT_ID/api-ai-discord-bot:latest']
+
+images: ['gcr.io/$PROJECT_ID/api-ai-discord-bot:latest', 'gcr.io/$PROJECT_ID/api-ai-discord-bot:$REVISION_ID']

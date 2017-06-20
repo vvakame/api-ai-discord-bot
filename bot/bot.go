@@ -23,6 +23,8 @@ type Config struct {
 var config *Config
 
 func main() {
+	pp.ColoringEnabled = false
+
 	dg, err := launchBot()
 	if err != nil {
 		panic(err)
@@ -129,7 +131,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		content = strings.TrimSpace(content)
 	}
 
-	fmt.Println(content)
+	fmt.Println("query", content)
 
 	ai := &apiaigo.APIAI{
 		AuthToken: config.apiaiDeveloperAccessToken,
@@ -139,24 +141,28 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 	queryResp, err := ai.SendText(content)
 	if err != nil {
+		fmt.Printf("ai.SendText: %v", err.Error())
 		fmt.Errorf("ai.SendText: %v", err.Error())
 		return
 	}
 
 	_, err = s.ChannelMessageSend(m.ChannelID, queryResp.Result.Fulfillment.Messages[0].Speech)
 	if err != nil {
+		fmt.Printf("s.ChannelMessageSend: %v", err.Error())
 		fmt.Errorf("s.ChannelMessageSend: %v", err.Error())
 		return
 	}
 
 	channel, err := s.State.Channel(m.ChannelID)
 	if err != nil {
+		fmt.Printf("s.State.Channel: %v", err.Error())
 		fmt.Errorf("s.State.Channel: %v", err.Error())
 		return
 	}
 
 	guild, err := s.State.Guild(channel.GuildID)
 	if err != nil {
+		fmt.Printf("s.State.Guild: %v", err.Error())
 		fmt.Errorf("s.State.Guild: %v", err.Error())
 		return
 	}

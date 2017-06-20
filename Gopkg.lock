@@ -5,7 +5,7 @@
   branch = "master"
   name = "cloud.google.com/go"
   packages = ["compute/metadata"]
-  revision = "b8b88d2593afebb61b6f616bb3c85f79f28819d2"
+  revision = "1de0ed4e08034a9c7876ac0388a3ce4829975c2d"
 
 [[projects]]
   name = "github.com/bwmarrin/discordgo"
@@ -26,12 +26,6 @@
   revision = "d1532fc5d94ecdf2da29e24d7b99721f3287de4a"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/kamalpy/apiai-go"
-  packages = ["."]
-  revision = "3c3cd6b66ecfc301943cca0263e0ccf358b07875"
-
-[[projects]]
   name = "github.com/mattn/go-colorable"
   packages = ["."]
   revision = "941b50ebc6efddf4c41c8e4537a5f68a4e686b24"
@@ -44,16 +38,22 @@
   version = "v0.0.2"
 
 [[projects]]
+  branch = "json-message-type"
+  name = "github.com/vvakame/apiai-go"
+  packages = ["."]
+  revision = "45e4acfa2941b4a59e58fc8a88aea768f66d668b"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["nacl/secretbox","poly1305","salsa20/salsa"]
-  revision = "850760c427c516be930bc91280636328f1a62286"
+  revision = "adbae1b6b6fb4b02448a0fc0dbbc9ba2b95b294d"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context","context/ctxhttp"]
-  revision = "973f3f3bbd50e92b13faa6c53ec16f49b45e851c"
+  revision = "fe686d45ea04bc1bd4eff6a52865ce8757320325"
 
 [[projects]]
   branch = "master"
@@ -64,6 +64,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1274c3bbda124f025979f15ccdebecb9571512e2f4c8e98ace283312dc7bf258"
+  inputs-digest = "93a88ad0ff92dfd6605d3abfeed37cbf78e9adf2f4666c902b41aa51fc6f4f40"
   solver-name = "gps-cdcl"
   solver-version = 1

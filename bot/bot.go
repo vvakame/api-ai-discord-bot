@@ -12,7 +12,7 @@ import (
 	"cloud.google.com/go/compute/metadata"
 	"github.com/bwmarrin/discordgo"
 	"github.com/k0kubun/pp"
-	"github.com/kamalpy/apiai-go"
+	"github.com/vvakame/apiai-go"
 )
 
 type Config struct {
@@ -146,7 +146,15 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	_, err = s.ChannelMessageSend(m.ChannelID, queryResp.Result.Fulfillment.Messages[0].Speech)
+	var speech string
+	{
+		for _, message := range queryResp.Result.Fulfillment.Messages {
+			if message.Speech != "" {
+				speech = message.Speech
+			}
+		}
+	}
+	_, err = s.ChannelMessageSend(m.ChannelID, speech)
 	if err != nil {
 		fmt.Printf("s.ChannelMessageSend: %v", err.Error())
 		fmt.Errorf("s.ChannelMessageSend: %v", err.Error())
